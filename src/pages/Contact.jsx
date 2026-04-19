@@ -42,7 +42,9 @@ export default function Contact() {
               <FiMapPin size={26} />
               <div>
                 <h4>Location</h4>
-                <p>Grande Prairie, Alberta, Canada</p>
+                <p>11401 100 Ave.</p>
+                <p>Grande Prairie, AB T8V 5M6</p>
+                <p className="muted">Canada</p>
               </div>
             </div>
 
@@ -105,7 +107,7 @@ export default function Contact() {
       <section className="map-section">
         <iframe
           title="Swan City Roadhouse — Grande Prairie"
-          src="https://www.google.com/maps?q=Grande+Prairie+Alberta+Canada&output=embed"
+          src="https://www.google.com/maps?q=11401+100+Ave,+Grande+Prairie,+AB+T8V+5M6,+Canada&output=embed"
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
         />

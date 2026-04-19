@@ -10,12 +10,7 @@ export default function Home() {
         <div className="hero-planks" />
         <div className="hero-vignette" />
         <div className="hero-content container">
-          <div className="hero-badge">
-            <span className="star">★</span>
-            <span>Est. Grande Prairie</span>
-            <span className="star">★</span>
-          </div>
-          <img src="/SwanCity_Roadhouse_Logo.png" alt="Swan City Roadhouse" className="hero-logo" />
+          {/* <img src="/SwanCity_Roadhouse_Logo.png" alt="Swan City Roadhouse" className="hero-logo" /> */}
           <h1>Swan City Roadhouse</h1>
           <div className="star-rule light">
             <span className="star">★ ★ ★</span>
@@ -82,7 +77,7 @@ export default function Home() {
             <FiMapPin size={28} />
             <div>
               <h4>Find Us</h4>
-              <p>Grande Prairie, Alberta, Canada</p>
+              <p>11401 100 Ave., Grande Prairie, AB T8V 5M6, Canada</p>
             </div>
           </div>
           <div className="info-item">

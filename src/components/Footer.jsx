@@ -17,7 +17,7 @@ export default function Footer() {
 
         <div className="footer-col">
           <h4>Visit</h4>
-          <p><FiMapPin /> Grande Prairie, Alberta, Canada</p>
+          <p><FiMapPin /> 11401 100 Ave., Grande Prairie, AB T8V 5M6, Canada</p>
           <p><FiPhone /> <a href="tel:+15873220786">+1 (587) 322-0786</a></p>
         </div>
 

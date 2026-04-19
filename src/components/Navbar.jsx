@@ -19,10 +19,6 @@ export default function Navbar() {
       <div className="nav-inner container">
         <Link to="/" className="nav-logo" onClick={close}>
           <img src="/SwanCity_Logo.png" alt="Swan City Roadhouse" />
-          <span className="nav-logo-text">
-            <strong>Swan City</strong>
-            <small>Roadhouse</small>
-          </span>
         </Link>
 
         <button

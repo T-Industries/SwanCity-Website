@@ -1,0 +1,59 @@
+:root {
+  /* Requested core palette */
+  --color-red: #A4151D;            /* barnwood / saloon red */
+  --color-red-dark: #7A0E13;
+  --color-red-glow: rgba(164, 21, 29, 0.35);
+  --color-black: #1A120C;           /* smoky near-black */
+  --color-black-soft: #2A1E14;
+  --color-white: #F8F1E4;           /* aged off-white */
+  --color-pure-white: #FFFFFF;
+
+  /* Menu card background — parchment */
+  --color-cream: #F1E3C2;
+  --color-cream-dark: #DDC896;
+  --color-cream-shadow: #B89E66;
+
+  /* Saloon supporting colors */
+  --color-wood: #3B2419;            /* deep oak */
+  --color-wood-mid: #5C3820;
+  --color-brass: #C9822E;           /* whiskey / brass */
+  --color-brass-light: #E6A653;
+
+  --color-text: #2A1E14;
+  --color-text-muted: #6B5A47;
+  --color-border: #D9C8A7;
+
+  /* Fonts */
+  --font-western: 'Rye', 'IM Fell English SC', Georgia, serif;
+  --font-serif: 'IM Fell English', 'IM Fell English SC', Georgia, serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+
+  --max-width: 1200px;
+  --nav-height: 80px;
+  --radius: 4px;
+  --radius-lg: 10px;
+
+  --shadow-sm: 0 2px 6px rgba(26, 18, 12, 0.15);
+  --shadow: 0 8px 24px rgba(26, 18, 12, 0.18);
+  --shadow-lg: 0 18px 50px rgba(26, 18, 12, 0.35);
+
+  /* Textures (SVG data URIs — no external images) */
+  --tex-wood:
+    repeating-linear-gradient(90deg,
+      rgba(0,0,0,0.10) 0px, rgba(0,0,0,0.10) 1px,
+      transparent 1px, transparent 6px),
+    repeating-linear-gradient(90deg,
+      rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px,
+      transparent 1px, transparent 40px),
+    linear-gradient(180deg, #4A2D1C 0%, #341D11 100%);
+
+  --tex-parchment:
+    radial-gradient(ellipse at 20% 10%, rgba(184, 158, 102, 0.18) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 90%, rgba(184, 158, 102, 0.22) 0%, transparent 55%),
+    linear-gradient(180deg, #F4E7C7 0%, #ECDDB6 100%);
+
+  --tex-leather:
+    radial-gradient(ellipse at 30% 30%, rgba(255,255,255,0.04) 0%, transparent 40%),
+    radial-gradient(ellipse at 70% 80%, rgba(0,0,0,0.25) 0%, transparent 50%),
+    linear-gradient(180deg, #1E140D 0%, #120B07 100%);
+}

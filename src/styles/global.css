@@ -1,0 +1,206 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body, #root { height: 100%; }
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-text);
+  background: var(--color-white);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Subtle paper grain on main body */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(rgba(107, 90, 71, 0.06) 1px, transparent 1px);
+  background-size: 3px 3px;
+  z-index: 0;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-western);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  line-height: 1.1;
+  color: var(--color-black);
+}
+
+h1 { font-size: clamp(2.8rem, 6.5vw, 5.25rem); }
+h2 { font-size: clamp(2rem, 4.5vw, 3.25rem); }
+h3 {
+  font-size: 1.4rem;
+  font-family: var(--font-serif);
+  letter-spacing: 0.02em;
+  font-weight: 400;
+}
+h4 {
+  font-size: 1.05rem;
+  font-family: var(--font-western);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+p { margin-bottom: 1rem; }
+
+a { color: var(--color-red); text-decoration: none; transition: color 0.2s; }
+a:hover { color: var(--color-red-dark); }
+
+img { max-width: 100%; display: block; }
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* ------- Buttons: saloon-stamped pills ------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.9rem 1.9rem;
+  font-family: var(--font-western);
+  font-weight: 400;
+  font-size: 1rem;
+  letter-spacing: 0.14em;
+  border-radius: var(--radius);
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease;
+  text-transform: uppercase;
+  text-decoration: none;
+  position: relative;
+}
+
+.btn-primary {
+  background: var(--color-red);
+  color: var(--color-white);
+  box-shadow: 0 4px 0 var(--color-red-dark), 0 8px 18px rgba(0,0,0,0.18);
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 var(--color-red-dark), 0 12px 22px rgba(0,0,0,0.22);
+  color: var(--color-white);
+}
+.btn-primary:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 var(--color-red-dark), 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--color-white);
+  border-color: var(--color-brass-light);
+}
+.btn-outline:hover {
+  background: var(--color-brass);
+  color: var(--color-black);
+  border-color: var(--color-brass);
+}
+
+.btn-dark {
+  background: var(--color-black);
+  color: var(--color-white);
+  box-shadow: 0 4px 0 #000, 0 8px 18px rgba(0,0,0,0.25);
+}
+.btn-dark:hover {
+  background: var(--color-wood);
+  color: var(--color-white);
+  transform: translateY(-2px);
+}
+
+/* ------- Sections & ornamental dividers ------- */
+.section { padding: 5rem 0; position: relative; }
+
+.section-title {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+.section-title .eyebrow {
+  display: block;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--color-red);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+.section-title h2 {
+  position: relative;
+  display: inline-block;
+}
+
+/* Star divider — placed after headings or between blocks */
+.star-rule {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1.25rem auto;
+  color: var(--color-red);
+  max-width: 380px;
+}
+.star-rule::before,
+.star-rule::after {
+  content: '';
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, currentColor, transparent);
+}
+.star-rule .star {
+  font-size: 1.1rem;
+  letter-spacing: 0.4em;
+}
+.star-rule.light { color: var(--color-brass-light); }
+
+/* Decorative corner rule — horizontal rope */
+.rope-rule {
+  height: 6px;
+  background:
+    repeating-linear-gradient(135deg,
+      var(--color-brass) 0 4px,
+      var(--color-wood) 4px 8px);
+  border-top: 1px solid rgba(0,0,0,0.2);
+  border-bottom: 1px solid rgba(0,0,0,0.2);
+}
+
+/* Page wrapper (offsets fixed navbar) */
+.page-wrap {
+  min-height: calc(100vh - var(--nav-height));
+  padding-top: var(--nav-height);
+}
+
+/* Shared page headers (black plank band) */
+.page-header {
+  background: var(--tex-leather);
+  color: var(--color-white);
+  padding: 4rem 0 3.25rem;
+  text-align: center;
+  border-bottom: 6px solid var(--color-red);
+  box-shadow: inset 0 -30px 60px rgba(0,0,0,0.4);
+}
+.page-header h1 {
+  color: var(--color-white);
+  margin-bottom: 0.5rem;
+  text-shadow: 0 2px 0 rgba(0,0,0,0.5);
+}
+.page-header .subtitle {
+  color: var(--color-brass-light);
+  font-family: var(--font-serif);
+  font-style: italic;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 640px) {
+  .section { padding: 3.25rem 0; }
+  .page-header { padding: 3rem 0 2.5rem; }
+}

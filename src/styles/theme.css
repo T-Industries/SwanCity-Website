@@ -64,5 +64,5 @@
 }
 
 @media (max-width: 480px) {
-  :root { --nav-height: 92px; }
+  :root { --nav-height: 100px; }
 }

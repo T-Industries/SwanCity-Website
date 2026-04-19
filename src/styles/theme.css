@@ -57,3 +57,12 @@
     radial-gradient(ellipse at 70% 80%, rgba(0,0,0,0.25) 0%, transparent 50%),
     linear-gradient(180deg, #1E140D 0%, #120B07 100%);
 }
+
+/* Responsive nav height — keeps logo from overflowing on smaller screens */
+@media (max-width: 860px) {
+  :root { --nav-height: 110px; }
+}
+
+@media (max-width: 480px) {
+  :root { --nav-height: 92px; }
+}

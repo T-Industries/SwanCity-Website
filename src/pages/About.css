@@ -1,4 +1,9 @@
-.about-page { background: var(--color-white); }
+.about-page {
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.95)),
+    url('/bikeBackground.png') center top / cover no-repeat fixed;
+  background-color: var(--color-white);
+}
 
 .story-section {
   background: var(--color-white);
@@ -99,12 +104,12 @@
   width: 80px; height: 80px;
   border-radius: 50%;
   background: var(--color-black);
-  color: var(--color-brass-light);
+  color: var(--color-red);
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0 auto 1rem;
-  box-shadow: 0 0 0 4px var(--color-brass);
+  box-shadow: 0 0 0 3px var(--color-red);
 }
 .value-card h3 {
   margin-bottom: 0.5rem;

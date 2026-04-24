@@ -2,21 +2,13 @@
   position: fixed;
   top: 0; left: 0; right: 0;
   height: var(--nav-height);
-  background: var(--tex-wood);
+  background: var(--color-black);
   color: var(--color-white);
   z-index: 100;
   box-shadow:
-    0 2px 0 var(--color-brass),
-    0 6px 22px rgba(0,0,0,0.45);
-  border-bottom: 2px solid rgba(0,0,0,0.4);
-}
-.nav::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse at 50% 0%, rgba(201, 130, 46, 0.18) 0%, transparent 60%);
-  pointer-events: none;
+    0 2px 0 var(--color-red),
+    0 6px 18px rgba(0, 0, 0, 0.35);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .nav-inner {
@@ -73,7 +65,7 @@
 }
 .nav-links a:hover,
 .nav-links a.active {
-  color: var(--color-brass-light);
+  color: var(--color-red);
 }
 .nav-links a:hover::after,
 .nav-links a.active::after {
@@ -84,7 +76,7 @@
   display: none;
   background: none;
   border: none;
-  color: var(--color-brass-light);
+  color: var(--color-white);
   cursor: pointer;
   padding: 0.25rem;
 }
@@ -96,13 +88,13 @@
     top: var(--nav-height);
     left: 0; right: 0;
     flex-direction: column;
-    background: var(--tex-wood);
+    background: var(--color-black);
     padding: 1.5rem;
     gap: 1rem;
     transform: translateY(-120%);
     transition: transform 0.3s ease;
-    box-shadow: 0 14px 28px rgba(0,0,0,0.45);
-    border-bottom: 3px solid var(--color-brass);
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.3);
+    border-bottom: 3px solid var(--color-red);
   }
   .nav-links.open {
     transform: translateY(0);
@@ -110,7 +102,7 @@
   .nav-links a {
     display: block;
     padding: 0.85rem 0;
-    border-bottom: 1px dashed rgba(201, 130, 46, 0.3);
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.12);
     text-align: center;
   }
   .nav-links a::after { display: none; }

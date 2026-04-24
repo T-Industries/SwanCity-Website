@@ -77,7 +77,7 @@ export default function About() {
         <div className="container cta-inner">
           <GiCowboyBoot size={42} className="cta-icon" />
           <h2>Ready to Mosey On Down?</h2>
-          <p>Open seven days a week, 9 AM to 10 PM. We'll keep a seat warm.</p>
+          <p>Open seven days a week, 11 AM to 1 AM. We'll keep a seat warm.</p>
           <div className="cta-buttons">
             <Link to="/menu" className="btn btn-primary">View Menu</Link>
             <Link to="/contact" className="btn btn-outline">Contact Us</Link>

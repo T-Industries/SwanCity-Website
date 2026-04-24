@@ -18,13 +18,13 @@ export default function Footer() {
         <div className="footer-col">
           <h4>Visit</h4>
           <p><FiMapPin /> 11401 100 Ave., Grande Prairie, AB T8V 5M6, Canada</p>
-          <p><FiPhone /> <a href="tel:+15873220786">+1 (587) 322-0786</a></p>
+          <p><FiPhone /> <a href="tel:+18666584755">+1 (866) 658-4755</a></p>
         </div>
 
         <div className="footer-col">
           <h4>Hours</h4>
           <p><FiClock /> Monday – Sunday</p>
-          <p className="footer-muted">9:00 AM – 10:00 PM</p>
+          <p className="footer-muted">11:00 AM – 1:00 AM</p>
         </div>
 
         <div className="footer-col">
@@ -32,6 +32,8 @@ export default function Footer() {
           <ul className="footer-links">
             <li><Link to="/">Home</Link></li>
             <li><Link to="/menu">Menu</Link></li>
+            <li><Link to="/entertainment">Entertainment</Link></li>
+            <li><Link to="/reservation">Reservation</Link></li>
             <li><Link to="/about">About Us</Link></li>
             <li><Link to="/contact">Contact Us</Link></li>
           </ul>

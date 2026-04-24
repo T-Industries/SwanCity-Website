@@ -11,8 +11,8 @@ This document is the single source of truth for the website build. Review and ap
 - **Name:** Swan City Roadhouse
 - **Tagline:** _Eats · Drinks · Relax_
 - **Location:** 11401 100 Ave., Grande Prairie, AB T8V 5M6, Canada
-- **Phone:** +1 (587) 322-0786
-- **Hours:** Monday – Sunday, 9:00 AM – 10:00 PM
+- **Phone:** +1 (866) 658-4755
+- **Hours:** Monday – Sunday, 11:00 AM – 1:00 AM
 
 ### Logos (already in repo root)
 - `SwanCity_Logo.png` — primary logo
@@ -85,9 +85,9 @@ Logo on the left links back to Home. On mobile, the nav collapses into a hamburg
 - Photo slots (placeholders for now).
 
 ### 5.4 Contact Us  (`/contact`)
-- **Phone:** +1 (587) 322-0786  (click-to-call `tel:` link)
+- **Phone:** +1 (866) 658-4755  (click-to-call `tel:` link)
 - **Location:** 11401 100 Ave., Grande Prairie, AB T8V 5M6, Canada
-- **Business Hours:** Monday – Sunday, 9:00 AM – 10:00 PM
+- **Business Hours:** Monday – Sunday, 11:00 AM – 1:00 AM
 - Embedded Google Map of Grande Prairie (generic pin until exact street address is provided).
 - Optional simple contact form (name / email / message) — mailto-based unless a backend is added.
 

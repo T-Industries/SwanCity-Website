@@ -12,8 +12,8 @@
   text-align: center;
   padding: 4rem 0 5rem;
   background:
-    linear-gradient(rgba(26, 18, 12, 0.55), rgba(26, 18, 12, 0.75)),
-    url('/hero-saloon.jpg') center/cover no-repeat;
+    linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)),
+    url('/bikeBackground.png') center top / cover no-repeat;
   background-color: var(--color-black);
 }
 
@@ -79,11 +79,46 @@
   font-size: clamp(3rem, 7vw, 5.75rem);
 }
 
+/* ---- Neon sign effect on "Roadhouse" ---- */
+.hero h1 .neon {
+  color: #fff5f5;
+  text-shadow:
+    0 0 4px rgba(255, 255, 255, 0.9),
+    0 0 10px rgba(255, 255, 255, 0.8),
+    0 0 22px var(--color-red),
+    0 0 38px var(--color-red),
+    0 0 60px #ff1f32,
+    0 0 90px #ff1f32;
+  animation: neonFlicker 4.2s infinite;
+  will-change: opacity, text-shadow;
+}
+
+@keyframes neonFlicker {
+  0%, 18%, 22%, 25%, 53%, 57%, 100% {
+    opacity: 1;
+    text-shadow:
+      0 0 4px rgba(255, 255, 255, 0.9),
+      0 0 10px rgba(255, 255, 255, 0.8),
+      0 0 22px var(--color-red),
+      0 0 38px var(--color-red),
+      0 0 60px #ff1f32,
+      0 0 90px #ff1f32;
+  }
+  20%, 24%, 55% {
+    opacity: 0.45;
+    text-shadow: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero h1 .neon { animation: none; }
+}
+
 .hero-tagline {
   font-family: var(--font-western);
   font-size: clamp(1.5rem, 2.8vw, 2.2rem);
   letter-spacing: 0.35em;
-  color: var(--color-brass-light);
+  color: #f9f9f9;
   text-transform: uppercase;
   margin-bottom: 1.5rem;
   text-shadow: 0 2px 0 rgba(0,0,0,0.4);
@@ -91,7 +126,7 @@
 
 .hero-sub {
   font-size: 1.15rem;
-  color: #E8DCC4;
+  color: #eceae5;
   max-width: 620px;
   margin: 0 auto 2.25rem;
   font-family: var(--font-serif);
@@ -164,12 +199,12 @@
   width: 84px; height: 84px;
   border-radius: 50%;
   background: var(--color-black);
-  color: var(--color-brass-light);
+  color: var(--color-red);
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0 auto 1rem;
-  box-shadow: 0 0 0 4px var(--color-brass), 0 6px 14px rgba(0,0,0,0.3);
+  box-shadow: 0 0 0 3px var(--color-red), 0 6px 14px rgba(0,0,0,0.15);
 }
 .highlight-card h3 {
   margin-bottom: 0.5rem;

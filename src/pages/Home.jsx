@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { FiPhone, FiMapPin, FiClock } from 'react-icons/fi';
-import { GiSteak, GiBrandyBottle, GiCampfire, GiHorseshoe } from 'react-icons/gi';
+import { GiSteak, GiBrandyBottle, GiCampfire } from 'react-icons/gi';
 import './Home.css';
 
 export default function Home() {
@@ -11,11 +11,11 @@ export default function Home() {
         <div className="hero-vignette" />
         <div className="hero-content container">
           {/* <img src="/SwanCity_Roadhouse_Logo.png" alt="Swan City Roadhouse" className="hero-logo" /> */}
-          <h1>Swan City Roadhouse</h1>
+          <h1>Swan City <span className="neon">Roadhouse</span></h1>
           <div className="star-rule light">
             <span className="star">★ ★ ★</span>
           </div>
-          <p className="hero-tagline">Eats · Drinks · Relax</p>
+          <p className="hero-tagline">Eat · Drink · Relax</p>
           <p className="hero-sub">
             A proper cowboy saloon in Grande Prairie — hearty plates, a stocked bar, and
             the kind of welcome that keeps folks coming back.
@@ -84,24 +84,16 @@ export default function Home() {
             <FiClock size={28} />
             <div>
               <h4>Open Daily</h4>
-              <p>Mon – Sun · 9:00 AM – 10:00 PM</p>
+              <p>Mon – Sun · 11:00 AM – 1:00 AM</p>
             </div>
           </div>
           <div className="info-item">
             <FiPhone size={28} />
             <div>
               <h4>Ring Us Up</h4>
-              <p><a href="tel:+15873220786">+1 (587) 322-0786</a></p>
+              <p><a href="tel:+18666584755">+1 (866) 658-4755</a></p>
             </div>
           </div>
-        </div>
-        <div className="container cta-center">
-          <div className="horseshoe-row">
-            <GiHorseshoe size={28} />
-            <span>Y'all come back now</span>
-            <GiHorseshoe size={28} />
-          </div>
-          <Link to="/contact" className="btn btn-primary">Get in Touch</Link>
         </div>
       </section>
     </div>

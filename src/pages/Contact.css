@@ -1,4 +1,9 @@
-.contact-page { background: var(--color-white); }
+.contact-page {
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.95)),
+    url('/bikeBackground.png') center top / cover no-repeat fixed;
+  background-color: var(--color-white);
+}
 
 .contact-grid {
   display: grid;

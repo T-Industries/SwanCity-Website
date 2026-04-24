@@ -11,15 +11,8 @@ body {
   overflow-x: hidden;
 }
 
-/* Subtle paper grain on main body */
-body::before {
-  content: '';
-  position: fixed; inset: 0;
-  pointer-events: none;
-  background-image: radial-gradient(rgba(107, 90, 71, 0.06) 1px, transparent 1px);
-  background-size: 3px 3px;
-  z-index: 0;
-}
+/* Clean white body — no grain overlay */
+body::before { content: none; }
 
 h1, h2, h3, h4 {
   font-family: var(--font-western);
@@ -96,12 +89,12 @@ img { max-width: 100%; display: block; }
 .btn-outline {
   background: transparent;
   color: var(--color-white);
-  border-color: var(--color-brass-light);
+  border-color: var(--color-white);
 }
 .btn-outline:hover {
-  background: var(--color-brass);
-  color: var(--color-black);
-  border-color: var(--color-brass);
+  background: var(--color-red);
+  color: var(--color-white);
+  border-color: var(--color-red);
 }
 
 .btn-dark {

@@ -34,7 +34,7 @@ export default function Contact() {
               <FiPhone size={26} />
               <div>
                 <h4>Phone</h4>
-                <p><a href="tel:+15873220786">+1 (587) 322-0786</a></p>
+                <p><a href="tel:+18666584755">+1 (866) 658-4755</a></p>
               </div>
             </div>
 
@@ -53,7 +53,7 @@ export default function Contact() {
               <div>
                 <h4>Business Hours</h4>
                 <p>Monday – Sunday</p>
-                <p className="muted">9:00 AM – 10:00 PM</p>
+                <p className="muted">11:00 AM – 1:00 AM</p>
               </div>
             </div>
 

@@ -164,10 +164,10 @@ img { max-width: 100%; display: block; }
   border-bottom: 1px solid rgba(0,0,0,0.2);
 }
 
-/* Page wrapper (offsets fixed navbar) */
+/* Page wrapper (offsets fixed navbar — includes iOS safe-area inset) */
 .page-wrap {
-  min-height: calc(100vh - var(--nav-height));
-  padding-top: var(--nav-height);
+  min-height: calc(100vh - var(--nav-height) - env(safe-area-inset-top));
+  padding-top: calc(var(--nav-height) + env(safe-area-inset-top));
 }
 
 /* Shared page headers (black plank band) */

@@ -1,0 +1,134 @@
+const RECIPIENT = 'roadhouse@bluecilantro.ca';
+
+const escapeHtml = (str = '') =>
+  String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+
+export default async function handler(req, res) {
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
+  }
+
+  const { name, email, subject, message } = req.body || {};
+
+  if (!name || !email || !subject || !message) {
+    return res.status(400).json({ error: 'Missing required fields' });
+  }
+
+  // Graceful local-dev fallback (no SMTP2Go key — log & succeed)
+  if (!process.env.SMTP2GO_API_KEY) {
+    console.log('[contact] No SMTP2GO_API_KEY set — console fallback:');
+    console.log({ name, email, subject, message });
+    return res.status(200).json({ success: true, dev: true });
+  }
+
+  const textBody = [
+    `New Contact Message — Swan City Roadhouse`,
+    ``,
+    `Name: ${name}`,
+    `Email: ${email}`,
+    `Subject: ${subject}`,
+    ``,
+    `Message:`,
+    message,
+    ``,
+    `— Submitted via swancityroadhouse.ca`,
+  ].join('\n');
+
+  const safe = {
+    name: escapeHtml(name),
+    email: escapeHtml(email),
+    subject: escapeHtml(subject),
+    message: escapeHtml(message),
+  };
+
+  const htmlBody = `<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>New Contact Message — Swan City Roadhouse</title>
+</head>
+<body style="margin:0;padding:0;background:#F4F4F4;font-family:Georgia,'Times New Roman',serif;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#F4F4F4;padding:24px 0;">
+    <tr><td align="center">
+      <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background:#FFFFFF;box-shadow:0 4px 16px rgba(0,0,0,0.08);">
+
+        <!-- Header -->
+        <tr><td style="background:#111111;padding:32px 40px;text-align:center;border-bottom:4px solid #C8102E;">
+          <div style="font-family:Georgia,serif;font-size:11px;letter-spacing:4px;color:#C8102E;text-transform:uppercase;margin-bottom:6px;">— Eats · Drinks · Relax —</div>
+          <h1 style="margin:0;color:#FFFFFF;font-family:Georgia,serif;font-size:26px;letter-spacing:3px;text-transform:uppercase;font-weight:normal;">Swan City Roadhouse</h1>
+          <p style="margin:8px 0 0;color:#A8A8A8;font-size:13px;font-family:Arial,sans-serif;">New message from the website</p>
+        </td></tr>
+
+        <!-- Subject badge -->
+        <tr><td style="padding:24px 40px 0;">
+          <span style="display:inline-block;background:#C8102E;color:#FFFFFF;padding:8px 18px;border-radius:999px;font-size:12px;font-family:Arial,sans-serif;font-weight:bold;letter-spacing:1px;text-transform:uppercase;">${safe.subject}</span>
+        </td></tr>
+
+        <!-- Sender details -->
+        <tr><td style="padding:20px 40px 0;">
+          <p style="margin:0 0 8px;font-size:11px;letter-spacing:1.5px;color:#C8102E;text-transform:uppercase;font-family:Arial,sans-serif;font-weight:bold;">Sender Details</p>
+          <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+            <tr>
+              <td style="padding:10px 0;border-bottom:1px solid #E5E5E5;font-size:11px;text-transform:uppercase;letter-spacing:0.5px;color:#888;width:120px;font-family:Arial,sans-serif;">Name</td>
+              <td style="padding:10px 0;border-bottom:1px solid #E5E5E5;font-size:14px;color:#1A1A1A;font-family:Arial,sans-serif;">${safe.name}</td>
+            </tr>
+            <tr>
+              <td style="padding:10px 0;border-bottom:1px solid #E5E5E5;font-size:11px;text-transform:uppercase;letter-spacing:0.5px;color:#888;font-family:Arial,sans-serif;">Email</td>
+              <td style="padding:10px 0;border-bottom:1px solid #E5E5E5;font-size:14px;color:#1A1A1A;font-family:Arial,sans-serif;"><a href="mailto:${safe.email}" style="color:#C8102E;text-decoration:none;">${safe.email}</a></td>
+            </tr>
+          </table>
+        </td></tr>
+
+        <!-- Message body -->
+        <tr><td style="padding:24px 40px 32px;">
+          <p style="margin:0 0 8px;font-size:11px;letter-spacing:1.5px;color:#C8102E;text-transform:uppercase;font-family:Arial,sans-serif;font-weight:bold;">Message</p>
+          <div style="background:#F1E3C2;border-left:4px solid #C8102E;padding:18px 22px;font-size:14px;font-family:Arial,sans-serif;color:#1A1A1A;line-height:1.7;white-space:pre-wrap;">${safe.message}</div>
+        </td></tr>
+
+        <!-- Footer -->
+        <tr><td style="background:#111111;padding:18px 40px;text-align:center;font-family:Arial,sans-serif;color:#A8A8A8;font-size:12px;">
+          <div style="color:#C8102E;font-family:Georgia,serif;letter-spacing:3px;text-transform:uppercase;font-size:11px;margin-bottom:6px;">— Swan City Roadhouse —</div>
+          <div>11401 100 Ave., Grande Prairie, AB · +1 (866) 658-4755</div>
+          <div style="margin-top:6px;color:#666;font-size:10px;">Submitted via swancityroadhouse.ca</div>
+        </td></tr>
+
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>`;
+
+  const payload = {
+    api_key: process.env.SMTP2GO_API_KEY,
+    to: [RECIPIENT],
+    sender: process.env.SMTP2GO_SENDER_EMAIL || RECIPIENT,
+    reply_to: [email],
+    subject: `[Swan City] ${subject}`,
+    text_body: textBody,
+    html_body: htmlBody,
+  };
+
+  try {
+    const response = await fetch('https://api.smtp2go.com/v3/email/send', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    const data = await response.json();
+
+    if (!response.ok || data.data?.error) {
+      console.error('[contact] SMTP2Go error:', JSON.stringify(data));
+      return res.status(500).json({ error: 'Failed to send email' });
+    }
+
+    return res.status(200).json({ success: true });
+  } catch (err) {
+    console.error('[contact] fetch error:', err);
+    return res.status(500).json({ error: 'Failed to send email' });
+  }
+}

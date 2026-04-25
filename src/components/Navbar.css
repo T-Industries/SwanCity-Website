@@ -1,7 +1,8 @@
 .nav {
   position: fixed;
   top: 0; left: 0; right: 0;
-  height: var(--nav-height);
+  height: calc(var(--nav-height) + env(safe-area-inset-top));
+  padding-top: env(safe-area-inset-top);
   background: var(--color-black);
   color: var(--color-white);
   z-index: 100;
@@ -110,4 +111,5 @@
 
 @media (max-width: 480px) {
   .nav-inner { padding-left: 1rem; padding-right: 1rem; }
+  .nav-logo img { margin-top: 6px; }
 }

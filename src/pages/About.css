@@ -1,14 +1,12 @@
 .about-page {
   background:
-    linear-gradient(rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.95)),
+    linear-gradient(rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.80)),
     url('/bikeBackground.png') center top / cover no-repeat fixed;
   background-color: var(--color-white);
 }
 
 .story-section {
-  background: var(--color-white);
-  background-image: radial-gradient(rgba(59, 36, 25, 0.05) 1px, transparent 1px);
-  background-size: 4px 4px;
+  background: transparent;
 }
 
 .about-story {

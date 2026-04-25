@@ -1,16 +1,59 @@
 import { useState } from 'react';
-import { FiPhone, FiMapPin, FiClock, FiMail } from 'react-icons/fi';
+import { FiPhone, FiMapPin, FiClock, FiMail, FiCheckCircle, FiAlertCircle } from 'react-icons/fi';
 import { GiHorseshoe } from 'react-icons/gi';
 import './Contact.css';
 
-export default function Contact() {
-  const [form, setForm] = useState({ name: '', email: '', message: '' });
+const initialForm = { name: '', email: '', subject: '', message: '' };
 
-  const handleSubmit = (e) => {
+export default function Contact() {
+  const [form, setForm] = useState(initialForm);
+  const [errors, setErrors] = useState({});
+  const [status, setStatus] = useState('idle'); // idle | sending | success | error
+  const [serverError, setServerError] = useState('');
+
+  const handleChange = (field) => (e) => {
+    setForm({ ...form, [field]: e.target.value });
+    if (errors[field]) setErrors({ ...errors, [field]: undefined });
+  };
+
+  const validate = () => {
+    const e = {};
+    if (!form.name.trim()) e.name = 'Name is required';
+    if (!form.email.trim()) e.email = 'Email is required';
+    else if (!/^\S+@\S+\.\S+$/.test(form.email)) e.email = 'Please enter a valid email';
+    if (!form.subject.trim()) e.subject = 'Subject is required';
+    if (!form.message.trim()) e.message = 'Message is required';
+    return e;
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const subject = encodeURIComponent(`Swan City Roadhouse — Message from ${form.name}`);
-    const body = encodeURIComponent(`${form.message}\n\n— ${form.name} (${form.email})`);
-    window.location.href = `mailto:hello@swancityroadhouse.ca?subject=${subject}&body=${body}`;
+    const v = validate();
+    if (Object.keys(v).length) {
+      setErrors(v);
+      return;
+    }
+    setStatus('sending');
+    setServerError('');
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) throw new Error('Request failed');
+      setStatus('success');
+    } catch {
+      setStatus('error');
+      setServerError("Something went wrong. Please try again or call +1 (866) 658-4755.");
+    }
+  };
+
+  const reset = () => {
+    setForm(initialForm);
+    setErrors({});
+    setStatus('idle');
+    setServerError('');
   };
 
   return (
@@ -63,44 +106,84 @@ export default function Contact() {
             </div>
           </div>
 
-          <form className="contact-form" onSubmit={handleSubmit}>
-            <div className="form-corner tl">★</div>
-            <div className="form-corner tr">★</div>
-            <span className="eyebrow">— Write to Us —</span>
-            <h2>Send a Message</h2>
-            <div className="star-rule"><span className="star">★ ★ ★</span></div>
+          {status === 'success' ? (
+            <div className="contact-form contact-success">
+              <FiCheckCircle size={48} className="success-icon" />
+              <h2>Message Sent</h2>
+              <div className="star-rule"><span className="star">★ ★ ★</span></div>
+              <p>Thanks for reaching out. We'll get back to you shortly.</p>
+              <button type="button" onClick={reset} className="btn btn-primary">
+                Send Another
+              </button>
+            </div>
+          ) : (
+            <form className="contact-form" onSubmit={handleSubmit} noValidate>
+              <div className="form-corner tl">★</div>
+              <div className="form-corner tr">★</div>
+              <span className="eyebrow">— Write to Us —</span>
+              <h2>Send a Message</h2>
+              <div className="star-rule"><span className="star">★ ★ ★</span></div>
 
-            <label>
-              <span>Name</span>
-              <input
-                type="text"
-                required
-                value={form.name}
-                onChange={e => setForm({ ...form, name: e.target.value })}
-              />
-            </label>
-            <label>
-              <span>Email</span>
-              <input
-                type="email"
-                required
-                value={form.email}
-                onChange={e => setForm({ ...form, email: e.target.value })}
-              />
-            </label>
-            <label>
-              <span>Message</span>
-              <textarea
-                rows="5"
-                required
-                value={form.message}
-                onChange={e => setForm({ ...form, message: e.target.value })}
-              />
-            </label>
-            <button type="submit" className="btn btn-primary">
-              <FiMail /> Send Message
-            </button>
-          </form>
+              {status === 'error' && (
+                <div className="form-banner error">
+                  <FiAlertCircle /> <span>{serverError}</span>
+                </div>
+              )}
+
+              <label>
+                <span>Name</span>
+                <input
+                  type="text"
+                  value={form.name}
+                  onChange={handleChange('name')}
+                  className={errors.name ? 'has-error' : ''}
+                  disabled={status === 'sending'}
+                />
+                {errors.name && <small className="field-error">{errors.name}</small>}
+              </label>
+
+              <label>
+                <span>Email</span>
+                <input
+                  type="email"
+                  value={form.email}
+                  onChange={handleChange('email')}
+                  className={errors.email ? 'has-error' : ''}
+                  disabled={status === 'sending'}
+                />
+                {errors.email && <small className="field-error">{errors.email}</small>}
+              </label>
+
+              <label>
+                <span>Subject</span>
+                <input
+                  type="text"
+                  value={form.subject}
+                  onChange={handleChange('subject')}
+                  className={errors.subject ? 'has-error' : ''}
+                  disabled={status === 'sending'}
+                  placeholder="What's this about?"
+                />
+                {errors.subject && <small className="field-error">{errors.subject}</small>}
+              </label>
+
+              <label>
+                <span>Message</span>
+                <textarea
+                  rows="5"
+                  value={form.message}
+                  onChange={handleChange('message')}
+                  className={errors.message ? 'has-error' : ''}
+                  disabled={status === 'sending'}
+                />
+                {errors.message && <small className="field-error">{errors.message}</small>}
+              </label>
+
+              <button type="submit" className="btn btn-primary" disabled={status === 'sending'}>
+                <FiMail /> {status === 'sending' ? 'Sending…' : 'Send Message'}
+              </button>
+            </form>
+          )}
         </div>
       </section>
 

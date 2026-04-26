@@ -42,11 +42,22 @@ const fold = (line) => {
   return chunks.join('\r\n');
 };
 
-// Build .ics file content
-// durationHours default 2
+// Deterministic UID — same reservation data always produces the same UID,
+// so a CANCEL update can target the original event.
+export function reservationUid({ email, date, time, name, partySize }) {
+  const fingerprint = `${email}|${date}|${time}|${name}|${partySize}`;
+  const hash = crypto.createHash('sha1').update(fingerprint).digest('hex').slice(0, 24);
+  return `${hash}@swancityroadhouse.ca`;
+}
+
+// Build .ics file content.
+// method: 'REQUEST' (new/update) or 'CANCEL' (remove from calendar)
+// sequence: 0 for first send, must increment for updates (CANCEL uses 1)
 export function buildIcs({
   name, email, date, time, partySize, notes,
   durationHours = 2,
+  method = 'REQUEST',
+  sequence = 0,
   uid = null,
 }) {
   const dtStart = formatLocalIcs(date, time);
@@ -56,13 +67,19 @@ export function buildIcs({
   const dtEndTime = `${pad(endH).slice(-2)}:${pad(m)}`;
   const dtEnd = formatLocalIcs(date, endH >= 24 ? '23:59' : dtEndTime);
 
-  const eventUid = uid || `${crypto.randomBytes(8).toString('hex')}@swancityroadhouse.ca`;
+  const eventUid = uid || reservationUid({ email, date, time, name, partySize });
   const stamp = formatUtcStamp();
+  const isCancel = method === 'CANCEL';
+  const status = isCancel ? 'CANCELLED' : 'CONFIRMED';
 
-  const summary = escapeIcs(`Swan City Roadhouse — ${name} (party of ${partySize})`);
+  const summary = escapeIcs(
+    `${isCancel ? '[CANCELLED] ' : ''}Swan City Roadhouse — ${name} (party of ${partySize})`
+  );
   const description = escapeIcs(
     [
-      `Reservation at Swan City Roadhouse`,
+      isCancel
+        ? `This reservation has been cancelled.`
+        : `Reservation at Swan City Roadhouse`,
       `Guest: ${name}`,
       `Party size: ${partySize}`,
       notes ? `Notes: ${notes}` : null,
@@ -77,24 +94,27 @@ export function buildIcs({
     'VERSION:2.0',
     'PRODID:-//Swan City Roadhouse//Reservation//EN',
     'CALSCALE:GREGORIAN',
-    'METHOD:REQUEST',
+    `METHOD:${method}`,
     'BEGIN:VEVENT',
     `UID:${eventUid}`,
     `DTSTAMP:${stamp}`,
+    `SEQUENCE:${sequence}`,
     `DTSTART;TZID=America/Edmonton:${dtStart}`,
     `DTEND;TZID=America/Edmonton:${dtEnd}`,
     `SUMMARY:${summary}`,
     `DESCRIPTION:${description}`,
     `LOCATION:${escapeIcs(LOCATION)}`,
     `ORGANIZER;CN=${ROADHOUSE_NAME}:mailto:${ROADHOUSE_EMAIL}`,
-    `ATTENDEE;CN=${escapeIcs(name)};RSVP=TRUE;PARTSTAT=NEEDS-ACTION;ROLE=REQ-PARTICIPANT:mailto:${email}`,
-    'STATUS:CONFIRMED',
+    `ATTENDEE;CN=${escapeIcs(name)};RSVP=TRUE;PARTSTAT=${isCancel ? 'DECLINED' : 'NEEDS-ACTION'};ROLE=REQ-PARTICIPANT:mailto:${email}`,
+    `STATUS:${status}`,
     'TRANSP:OPAQUE',
-    'BEGIN:VALARM',
-    'ACTION:DISPLAY',
-    'DESCRIPTION:Reservation reminder — Swan City Roadhouse',
-    'TRIGGER:-PT1H',
-    'END:VALARM',
+    ...(isCancel ? [] : [
+      'BEGIN:VALARM',
+      'ACTION:DISPLAY',
+      'DESCRIPTION:Reservation reminder — Swan City Roadhouse',
+      'TRIGGER:-PT1H',
+      'END:VALARM',
+    ]),
     'END:VEVENT',
     'END:VCALENDAR',
   ];

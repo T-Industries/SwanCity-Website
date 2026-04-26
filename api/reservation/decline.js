@@ -1,5 +1,6 @@
 import { verifyToken } from '../_utils/token.js';
 import { sendEmail } from '../_utils/sendEmail.js';
+import { buildIcs } from '../_utils/ics.js';
 import {
   guestDeclineEmail, guestDeclineText,
   roadhouseRecordEmail,
@@ -39,21 +40,37 @@ export default async function handler(req, res) {
 
   const { name, phone, email, date, time, partySize, notes } = payload;
 
-  // 1) Send polite decline to guest
+  // CANCEL .ics — same deterministic UID as the (possible) prior CONFIRMED event,
+  // SEQUENCE:1 so calendar apps treat it as an update that removes the event.
+  const cancelIcs = buildIcs({
+    name, email, date, time, partySize, notes,
+    method: 'CANCEL',
+    sequence: 1,
+  });
+
+  const cancelAttachment = {
+    filename: 'reservation-cancelled.ics',
+    content: cancelIcs,
+    mimetype: 'text/calendar; method=CANCEL; charset=utf-8',
+  };
+
+  // 1) Send polite decline to guest (with CANCEL .ics — removes from their calendar if previously added)
   const guestRes = await sendEmail({
     to: email,
     replyTo: RECIPIENT,
     subject: `About your reservation request — Swan City Roadhouse`,
     html: guestDeclineEmail({ name, date, time, partySize }),
     text: guestDeclineText({ name, date, time, partySize }),
+    attachments: [cancelAttachment],
   });
 
-  // 2) Send brief internal log to roadhouse
+  // 2) Send brief internal log to roadhouse (with CANCEL .ics so their calendar updates too)
   const internalRes = await sendEmail({
     to: RECIPIENT,
     subject: `[Swan City] Declined: ${name} — ${formatDate(date)} @ ${formatTime(time)} (${partySize})`,
     html: roadhouseRecordEmail({ action: 'declined', name, phone, email, date, time, partySize, notes }),
-    text: `Reservation DECLINED for ${name} (party of ${partySize}) on ${formatDate(date)} at ${formatTime(time)}. Guest has been notified.`,
+    text: `Reservation DECLINED for ${name} (party of ${partySize}) on ${formatDate(date)} at ${formatTime(time)}. Guest has been notified. Calendar cancellation attached.`,
+    attachments: [cancelAttachment],
   });
 
   if (!guestRes.ok || !internalRes.ok) {

@@ -95,6 +95,83 @@
   line-height: 1.6;
 }
 
+/* Karaoke ticket section */
+.karaoke-ticket-section {
+  background: transparent;
+}
+.karaoke-ticket-inner {
+  display: flex;
+  justify-content: center;
+}
+.karaoke-ticket-card {
+  position: relative;
+  background: var(--tex-parchment);
+  border: 1px solid var(--color-cream-shadow);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  padding: 2.5rem 2rem 2rem;
+  max-width: 720px;
+  width: 100%;
+  text-align: center;
+}
+.karaoke-icon-wrap {
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  background: var(--color-black);
+  color: var(--color-red);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.1rem;
+  box-shadow: 0 0 0 3px var(--color-red), 0 6px 16px rgba(0,0,0,0.18);
+}
+.karaoke-ticket-card h2 {
+  font-family: var(--font-western);
+  color: var(--color-black);
+  margin: 0.4rem 0 0.25rem;
+  letter-spacing: 0.03em;
+}
+.karaoke-blurb {
+  color: var(--color-text-muted);
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  line-height: 1.7;
+  max-width: 560px;
+  margin: 0.75rem auto 1.5rem;
+}
+.karaoke-ticket-cta {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+}
+.karaoke-embed-wrap {
+  margin: 0.5rem 0 1rem;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid var(--color-cream-shadow);
+  min-height: 500px;
+}
+.eventbrite-embed,
+.eventbrite-embed iframe {
+  width: 100%;
+  display: block;
+}
+.karaoke-powered {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  margin: 0;
+  opacity: 0.8;
+}
+
+@media (max-width: 600px) {
+  .karaoke-ticket-card { padding: 2rem 1.25rem 1.5rem; }
+  .karaoke-ticket-card h2 { font-size: 1.6rem; }
+}
+
 /* CTA strip */
 .ent-cta-section {
   background: var(--tex-leather);

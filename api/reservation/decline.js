@@ -42,17 +42,23 @@ export default async function handler(req, res) {
 
   // CANCEL .ics — same deterministic UID as the (possible) prior CONFIRMED event,
   // SEQUENCE:1 so calendar apps treat it as an update that removes the event.
-  const cancelIcs = buildIcs({
+  // Each recipient gets a version where they themselves are listed as ATTENDEE
+  // so the calendar app recognizes the cancellation applies to their event.
+
+  const guestCancelIcs = buildIcs({
     name, email, date, time, partySize, notes,
-    method: 'CANCEL',
-    sequence: 1,
+    method: 'CANCEL', sequence: 1,
+    attendees: [{ name, email, role: 'REQ-PARTICIPANT' }],
   });
 
-  const cancelAttachment = {
-    filename: 'reservation-cancelled.ics',
-    content: cancelIcs,
-    mimetype: 'text/calendar; method=CANCEL; charset=utf-8',
-  };
+  const roadhouseCancelIcs = buildIcs({
+    name, email, date, time, partySize, notes,
+    method: 'CANCEL', sequence: 1,
+    attendees: [
+      { name: 'Swan City Roadhouse', email: RECIPIENT, role: 'REQ-PARTICIPANT' },
+      { name, email, role: 'REQ-PARTICIPANT' },
+    ],
+  });
 
   // 1) Send polite decline to guest (with CANCEL .ics — removes from their calendar if previously added)
   const guestRes = await sendEmail({
@@ -61,7 +67,11 @@ export default async function handler(req, res) {
     subject: `About your reservation request — Swan City Roadhouse`,
     html: guestDeclineEmail({ name, date, time, partySize }),
     text: guestDeclineText({ name, date, time, partySize }),
-    attachments: [cancelAttachment],
+    attachments: [{
+      filename: 'reservation-cancelled.ics',
+      content: guestCancelIcs,
+      mimetype: 'text/calendar; method=CANCEL; charset=utf-8',
+    }],
   });
 
   // 2) Send brief internal log to roadhouse (with CANCEL .ics so their calendar updates too)
@@ -70,7 +80,11 @@ export default async function handler(req, res) {
     subject: `[Swan City] Declined: ${name} — ${formatDate(date)} @ ${formatTime(time)} (${partySize})`,
     html: roadhouseRecordEmail({ action: 'declined', name, phone, email, date, time, partySize, notes }),
     text: `Reservation DECLINED for ${name} (party of ${partySize}) on ${formatDate(date)} at ${formatTime(time)}. Guest has been notified. Calendar cancellation attached.`,
-    attachments: [cancelAttachment],
+    attachments: [{
+      filename: 'reservation-cancelled.ics',
+      content: roadhouseCancelIcs,
+      mimetype: 'text/calendar; method=CANCEL; charset=utf-8',
+    }],
   });
 
   if (!guestRes.ok || !internalRes.ok) {

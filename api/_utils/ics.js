@@ -53,12 +53,14 @@ export function reservationUid({ email, date, time, name, partySize }) {
 // Build .ics file content.
 // method: 'REQUEST' (new/update) or 'CANCEL' (remove from calendar)
 // sequence: 0 for first send, must increment for updates (CANCEL uses 1)
+// attendees: array of { name, email, role? }; defaults to just the guest (backwards-compatible)
 export function buildIcs({
   name, email, date, time, partySize, notes,
   durationHours = 2,
   method = 'REQUEST',
   sequence = 0,
   uid = null,
+  attendees = null,
 }) {
   const dtStart = formatLocalIcs(date, time);
   // add hours
@@ -89,6 +91,16 @@ export function buildIcs({
     ].filter(Boolean).join('\n')
   );
 
+  const attendeeList = attendees && attendees.length
+    ? attendees
+    : [{ name, email, role: 'REQ-PARTICIPANT' }];
+
+  const partstat = isCancel ? 'DECLINED' : 'NEEDS-ACTION';
+  const attendeeLines = attendeeList.map(a => {
+    const role = a.role || 'REQ-PARTICIPANT';
+    return `ATTENDEE;CN=${escapeIcs(a.name)};RSVP=TRUE;PARTSTAT=${partstat};ROLE=${role}:mailto:${a.email}`;
+  });
+
   const lines = [
     'BEGIN:VCALENDAR',
     'VERSION:2.0',
@@ -105,7 +117,7 @@ export function buildIcs({
     `DESCRIPTION:${description}`,
     `LOCATION:${escapeIcs(LOCATION)}`,
     `ORGANIZER;CN=${ROADHOUSE_NAME}:mailto:${ROADHOUSE_EMAIL}`,
-    `ATTENDEE;CN=${escapeIcs(name)};RSVP=TRUE;PARTSTAT=${isCancel ? 'DECLINED' : 'NEEDS-ACTION'};ROLE=REQ-PARTICIPANT:mailto:${email}`,
+    ...attendeeLines,
     `STATUS:${status}`,
     'TRANSP:OPAQUE',
     ...(isCancel ? [] : [

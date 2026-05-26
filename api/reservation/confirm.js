@@ -40,8 +40,23 @@ export default async function handler(req, res) {
 
   const { name, phone, email, date, time, partySize, notes } = payload;
 
-  // Build .ics for the confirmed event
-  const ics = buildIcs({ name, email, date, time, partySize, notes, durationHours: 2 });
+  // Guest .ics — guest is the attendee (Gmail shows RSVP UI for them)
+  const guestIcs = buildIcs({
+    name, email, date, time, partySize, notes,
+    durationHours: 2,
+    attendees: [{ name, email, role: 'REQ-PARTICIPANT' }],
+  });
+
+  // Roadhouse .ics — roadhouse listed as attendee so Gmail offers "Add to calendar"
+  // Guest is also listed as an attendee for context.
+  const roadhouseIcs = buildIcs({
+    name, email, date, time, partySize, notes,
+    durationHours: 2,
+    attendees: [
+      { name: 'Swan City Roadhouse', email: RECIPIENT, role: 'REQ-PARTICIPANT' },
+      { name, email, role: 'REQ-PARTICIPANT' },
+    ],
+  });
 
   // 1) Send confirmation email to the guest (with .ics attached)
   const guestRes = await sendEmail({
@@ -52,12 +67,12 @@ export default async function handler(req, res) {
     text: guestConfirmText({ name, date, time, partySize }),
     attachments: [{
       filename: 'reservation.ics',
-      content: ics,
+      content: guestIcs,
       mimetype: 'text/calendar; method=REQUEST; charset=utf-8',
     }],
   });
 
-  // 2) Send internal record email to roadhouse (with .ics attached for their calendar)
+  // 2) Send internal record email to roadhouse (with .ics where they're an ATTENDEE)
   const internalRes = await sendEmail({
     to: RECIPIENT,
     subject: `[Swan City] Confirmed: ${name} — ${formatDate(date)} @ ${formatTime(time)} (${partySize})`,
@@ -65,7 +80,7 @@ export default async function handler(req, res) {
     text: `Reservation CONFIRMED for ${name} (party of ${partySize}) on ${formatDate(date)} at ${formatTime(time)}. Calendar invite attached.`,
     attachments: [{
       filename: 'reservation.ics',
-      content: ics,
+      content: roadhouseIcs,
       mimetype: 'text/calendar; method=REQUEST; charset=utf-8',
     }],
   });

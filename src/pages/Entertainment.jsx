@@ -1,38 +1,11 @@
 import { Link } from 'react-router-dom';
-import { GiMicrophone, GiGuitar, GiCardAceSpades, GiAmericanFootballBall, GiPartyPopper } from 'react-icons/gi';
+import { GiMicrophone, GiPartyPopper } from 'react-icons/gi';
 import { FiCalendar } from 'react-icons/fi';
+import EventbriteCheckoutEmbed from '../components/EventbriteCheckoutEmbed.jsx';
 import './Entertainment.css';
 
-const EVENTS = [
-  {
-    icon: GiGuitar,
-    day: 'Friday & Saturday',
-    title: 'Live Music',
-    time: '8:00 PM – Midnight',
-    blurb: 'Local bands taking the stage every weekend — country, rock, and everything in between.',
-  },
-  {
-    icon: GiMicrophone,
-    day: 'Thursday',
-    title: 'Karaoke Night',
-    time: '9:00 PM – 1:00 AM',
-    blurb: 'Grab the mic, grab a drink. Sing your heart out — cowboy classics strongly encouraged.',
-  },
-  {
-    icon: GiCardAceSpades,
-    day: 'Wednesday',
-    title: 'Trivia Night',
-    time: '7:30 PM – 9:30 PM',
-    blurb: 'Round up your crew and play for bragging rights and house prizes.',
-  },
-  {
-    icon: GiAmericanFootballBall,
-    day: 'Every Game Day',
-    title: 'Big Game Viewing',
-    time: 'All game hours',
-    blurb: 'NHL, NFL, UFC, and more on the big screens. Cold beer and shareables on tap.',
-  },
-];
+const KARAOKE_EVENTBRITE_ID = '1990185338923';
+const KARAOKE_EVENTBRITE_URL = `https://www.eventbrite.com/e/karaoke-night-tickets-${KARAOKE_EVENTBRITE_ID}`;
 
 export default function Entertainment() {
   return (
@@ -45,35 +18,36 @@ export default function Entertainment() {
         </div>
       </header>
 
-      <section className="section">
-        <div className="container">
-          <div className="section-title">
-            <span className="eyebrow">— What's Happening —</span>
-            <h2>The Weekly Lineup</h2>
+      <section className="section karaoke-ticket-section">
+        <div className="container karaoke-ticket-inner">
+          <div className="karaoke-ticket-card">
+            <div className="event-corner tl">★</div>
+            <div className="event-corner tr">★</div>
+            <div className="event-corner bl">★</div>
+            <div className="event-corner br">★</div>
+            <div className="karaoke-icon-wrap"><GiMicrophone size={48} /></div>
+            <span className="eyebrow">— This Thursday —</span>
+            <h2>Karaoke Night — Grab the Mic</h2>
             <div className="star-rule"><span className="star">★ ★ ★</span></div>
-            <p className="ent-intro">
-              From live bands to karaoke, trivia to big-game nights — there's always
-              somethin' going on at the Roadhouse. Pull up a chair and stay a while.
+            <p className="karaoke-blurb">
+              Thursday nights belong to you and the spotlight. Sing your heart out,
+              cheer on your friends, and keep the drinks flowin' from 9 PM till 1 AM.
+              Reserve your spot in advance — tickets go fast.
             </p>
-          </div>
-
-          <div className="events">
-            {EVENTS.map((e, i) => {
-              const Icon = e.icon;
-              return (
-                <article key={i} className="event-card">
-                  <div className="event-corner tl">★</div>
-                  <div className="event-corner tr">★</div>
-                  <div className="event-corner bl">★</div>
-                  <div className="event-corner br">★</div>
-                  <div className="event-icon-wrap"><Icon size={42} /></div>
-                  <span className="event-day">{e.day}</span>
-                  <h3>{e.title}</h3>
-                  <p className="event-time">{e.time}</p>
-                  <p className="event-blurb">{e.blurb}</p>
-                </article>
-              );
-            })}
+            <div className="karaoke-ticket-cta">
+              <a
+                href={KARAOKE_EVENTBRITE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-primary"
+              >
+                Buy Tickets on Eventbrite
+              </a>
+            </div>
+            <div className="karaoke-embed-wrap">
+              <EventbriteCheckoutEmbed eventId={KARAOKE_EVENTBRITE_ID} height={500} />
+            </div>
+            <p className="karaoke-powered">Secure checkout powered by Eventbrite</p>
           </div>
         </div>
       </section>

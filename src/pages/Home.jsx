@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { FiPhone, FiMapPin, FiClock } from 'react-icons/fi';
-import { GiSteak, GiBrandyBottle, GiCampfire } from 'react-icons/gi';
+import { GiSteak, GiBrandyBottle, GiCampfire, GiMicrophone } from 'react-icons/gi';
 import './Home.css';
 
 export default function Home() {
@@ -22,7 +22,11 @@ export default function Home() {
           </p>
           <div className="hero-cta">
             <Link to="/menu" className="btn btn-primary">See the Menu</Link>
-            <Link to="/contact" className="btn btn-outline">Swing By</Link>
+            <Link to="/entertainment" className="btn btn-primary btn-event-glow">
+              <GiMicrophone size={20} aria-hidden="true" />
+              <span>Upcoming Event</span>
+              <span className="btn-event-pulse" aria-hidden="true" />
+            </Link>
           </div>
         </div>
       </section>

@@ -141,6 +141,78 @@
   flex-wrap: wrap;
 }
 
+/* Highlighted "Upcoming Event" CTA — pulsing red glow with a live-dot */
+.btn-event-glow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding-right: 2.4rem;
+  background: var(--color-red);
+  color: var(--color-white);
+  box-shadow:
+    0 4px 0 var(--color-red-dark),
+    0 8px 18px rgba(0,0,0,0.18),
+    0 0 22px rgba(200, 16, 46, 0.55);
+  animation: eventGlowPulse 2.2s ease-in-out infinite;
+}
+.btn-event-glow svg {
+  color: var(--color-brass-light);
+  filter: drop-shadow(0 0 4px rgba(230, 166, 83, 0.6));
+}
+.btn-event-glow:hover {
+  transform: translateY(-2px);
+  color: var(--color-white);
+  box-shadow:
+    0 6px 0 var(--color-red-dark),
+    0 12px 24px rgba(0,0,0,0.22),
+    0 0 32px rgba(255, 60, 80, 0.85);
+}
+.btn-event-glow:active {
+  transform: translateY(2px);
+}
+
+/* Live-dot pulse on the right side of the button */
+.btn-event-pulse {
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #fff5f5;
+  transform: translateY(-50%);
+  box-shadow:
+    0 0 0 0 rgba(255, 255, 255, 0.7),
+    0 0 10px rgba(255, 255, 255, 0.9);
+  animation: eventDotPulse 1.6s ease-out infinite;
+}
+
+@keyframes eventGlowPulse {
+  0%, 100% {
+    box-shadow:
+      0 4px 0 var(--color-red-dark),
+      0 8px 18px rgba(0,0,0,0.18),
+      0 0 18px rgba(200, 16, 46, 0.45);
+  }
+  50% {
+    box-shadow:
+      0 4px 0 var(--color-red-dark),
+      0 8px 18px rgba(0,0,0,0.18),
+      0 0 38px rgba(255, 60, 80, 0.9);
+  }
+}
+
+@keyframes eventDotPulse {
+  0%   { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7), 0 0 10px rgba(255, 255, 255, 0.9); }
+  70%  { box-shadow: 0 0 0 12px rgba(255, 255, 255, 0),   0 0 10px rgba(255, 255, 255, 0.9); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0),      0 0 10px rgba(255, 255, 255, 0.9); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-event-glow,
+  .btn-event-pulse { animation: none; }
+}
+
 /* --------- Welcome section: parchment page --------- */
 .welcome-section {
   background: var(--tex-parchment);

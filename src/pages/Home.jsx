@@ -24,7 +24,7 @@ export default function Home() {
             <Link to="/menu" className="btn btn-primary">See the Menu</Link>
             <Link to="/entertainment" className="btn btn-primary btn-event-glow">
               <GiMicrophone size={20} aria-hidden="true" />
-              <span>Upcoming Event</span>
+              <span>Upcoming Events</span>
               <span className="btn-event-pulse" aria-hidden="true" />
             </Link>
           </div>

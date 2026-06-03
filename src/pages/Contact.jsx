@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FiPhone, FiMapPin, FiClock, FiMail, FiCheckCircle, FiAlertCircle } from 'react-icons/fi';
+import { FiPhone, FiMapPin, FiMail, FiCheckCircle, FiAlertCircle } from 'react-icons/fi';
 import { GiHorseshoe } from 'react-icons/gi';
 import './Contact.css';
 
@@ -45,7 +45,7 @@ export default function Contact() {
       setStatus('success');
     } catch {
       setStatus('error');
-      setServerError("Something went wrong. Please try again or call +1 (866) 658-4755.");
+      setServerError("Something went wrong. Please try again or call +1 (587) 495-0804.");
     }
   };
 
@@ -77,7 +77,7 @@ export default function Contact() {
               <FiPhone size={26} />
               <div>
                 <h4>Phone</h4>
-                <p><a href="tel:+18666584755">+1 (866) 658-4755</a></p>
+                <p><a href="tel:+15874950804">+1 (587) 495-0804</a></p>
               </div>
             </div>
 
@@ -92,11 +92,11 @@ export default function Contact() {
             </div>
 
             <div className="contact-item">
-              <FiClock size={26} />
               <div>
                 <h4>Business Hours</h4>
-                <p>Monday – Sunday</p>
-                <p className="muted">11:00 AM – 1:00 AM</p>
+                <p>Monday – Thursday: 3:30 PM – 12:00 AM</p>
+                <p>Friday – Saturday: 3:30 PM – 1:00 AM</p>
+                <p>Sunday: 3:30 PM – 2:00 AM</p>
               </div>
             </div>
 

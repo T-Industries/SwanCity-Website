@@ -10,7 +10,7 @@ export const escapeHtml = (str = '') =>
     .replace(/'/g, '&#39;');
 
 const ADDRESS = '11401 100 Ave., Grande Prairie, AB';
-const PHONE = '+1 (866) 658-4755';
+const PHONE = '+1 (587) 495-0804';
 
 const formatDate = (iso) => {
   if (!iso) return '';
@@ -85,7 +85,7 @@ export function guestConfirmEmail({ name, date, time, partySize }) {
     </td></tr>
     <tr><td style="padding:24px 40px;font-family:Arial,sans-serif;color:#1A1A1A;font-size:14px;line-height:1.7;">
       <p style="margin:0 0 12px;"><strong>Where:</strong> ${ADDRESS}</p>
-      <p style="margin:0 0 12px;"><strong>Phone:</strong> <a href="tel:+18666584755" style="color:#C8102E;text-decoration:none;">${PHONE}</a></p>
+      <p style="margin:0 0 12px;"><strong>Phone:</strong> <a href="tel:+15874950804" style="color:#C8102E;text-decoration:none;">${PHONE}</a></p>
       <p style="margin:16px 0 0;color:#5E5E5E;font-size:13px;">A calendar invite is attached — open it to add the reservation to your phone or computer calendar.</p>
       <p style="margin:8px 0 0;color:#5E5E5E;font-size:13px;">Need to change anything? Give us a ring at the number above.</p>
     </td></tr>
@@ -150,9 +150,9 @@ export function guestDeclineEmail({ name, date, time, partySize }) {
     <tr><td style="padding:24px 40px;font-family:Arial,sans-serif;color:#1A1A1A;font-size:14px;line-height:1.7;">
       <p style="margin:0 0 12px;">Unfortunately we couldn't accommodate this booking. We'd love to fit you in another time — please give us a call so we can find something that works.</p>
       <p style="margin:16px 0 0;text-align:center;">
-        <a href="tel:+18666584755" style="display:inline-block;background:#C8102E;color:#FFFFFF;padding:12px 24px;font-family:Arial,sans-serif;font-size:14px;letter-spacing:1px;text-transform:uppercase;font-weight:bold;text-decoration:none;border-radius:4px;">Call ${PHONE}</a>
+        <a href="tel:+15874950804" style="display:inline-block;background:#C8102E;color:#FFFFFF;padding:12px 24px;font-family:Arial,sans-serif;font-size:14px;letter-spacing:1px;text-transform:uppercase;font-weight:bold;text-decoration:none;border-radius:4px;">Call ${PHONE}</a>
       </p>
-      <p style="margin:24px 0 0;color:#5E5E5E;font-size:13px;text-align:center;">Walk-ins are always welcome too — open Mon–Sun, 11 AM–1 AM.</p>
+      <p style="margin:24px 0 0;color:#5E5E5E;font-size:13px;text-align:center;">Walk-ins are always welcome too — open Mon–Sun from 3:30 PM.</p>
     </td></tr>
   `;
 
@@ -174,7 +174,7 @@ export function guestDeclineText({ name, date, time, partySize }) {
     `  ${partySize} ${peopleLabel} — ${formatDate(date)} at ${formatTime(time)}`,
     ``,
     `Give us a call at ${PHONE} so we can find a time that works.`,
-    `Walk-ins always welcome too — Mon–Sun, 11 AM–1 AM.`,
+    `Walk-ins always welcome too — Mon–Sun from 3:30 PM.`,
     ``,
     `— Swan City Roadhouse`,
   ].join('\n');

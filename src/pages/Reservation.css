@@ -41,6 +41,19 @@
   color: var(--color-red);
   font-weight: 600;
 }
+.res-hours {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 0;
+}
+.res-hours li {
+  padding: 0.15rem 0;
+  margin: 0;
+  background: none;
+  border: none;
+  border-radius: 0;
+  font-size: 1rem;
+}
 
 .horseshoe-note {
   margin-top: 0.5rem;

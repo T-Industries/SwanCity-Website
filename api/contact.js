@@ -93,7 +93,7 @@ export default async function handler(req, res) {
         <!-- Footer -->
         <tr><td style="background:#111111;padding:18px 40px;text-align:center;font-family:Arial,sans-serif;color:#A8A8A8;font-size:12px;">
           <div style="color:#C8102E;font-family:Georgia,serif;letter-spacing:3px;text-transform:uppercase;font-size:11px;margin-bottom:6px;">— Swan City Roadhouse —</div>
-          <div>11401 100 Ave., Grande Prairie, AB · +1 (866) 658-4755</div>
+          <div>11401 100 Ave., Grande Prairie, AB · +1 (587) 495-0804</div>
           <div style="margin-top:6px;color:#666;font-size:10px;">Submitted via swancityroadhouse.ca</div>
         </td></tr>
 

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { FiPhone, FiMapPin, FiClock } from 'react-icons/fi';
+import { FiPhone, FiMapPin } from 'react-icons/fi';
 import { GiSteak, GiBrandyBottle, GiCampfire, GiMicrophone } from 'react-icons/gi';
 import './Home.css';
 
@@ -22,7 +22,7 @@ export default function Home() {
           </p>
           <div className="hero-cta">
             <Link to="/menu" className="btn btn-primary">See the Menu</Link>
-            <Link to="/entertainment" className="btn btn-primary btn-event-glow">
+            <Link to="/events" className="btn btn-primary btn-event-glow">
               <GiMicrophone size={20} aria-hidden="true" />
               <span>Upcoming Events</span>
               <span className="btn-event-pulse" aria-hidden="true" />
@@ -85,17 +85,18 @@ export default function Home() {
             </div>
           </div>
           <div className="info-item">
-            <FiClock size={28} />
             <div>
               <h4>Open Daily</h4>
-              <p>Mon – Sun · 11:00 AM – 1:00 AM</p>
+              <p>Mon – Thu · 3:30 PM – 12:00 AM</p>
+              <p>Fri – Sat · 3:30 PM – 1:00 AM</p>
+              <p>Sun · 3:30 PM – 2:00 AM</p>
             </div>
           </div>
           <div className="info-item">
             <FiPhone size={28} />
             <div>
               <h4>Ring Us Up</h4>
-              <p><a href="tel:+18666584755">+1 (866) 658-4755</a></p>
+              <p><a href="tel:+15874950804">+1 (587) 495-0804</a></p>
             </div>
           </div>
         </div>

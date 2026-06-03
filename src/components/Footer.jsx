@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { FiPhone, FiMapPin, FiClock } from 'react-icons/fi';
+import { FiPhone, FiMapPin } from 'react-icons/fi';
 import './Footer.css';
 
 export default function Footer() {
@@ -18,13 +18,14 @@ export default function Footer() {
         <div className="footer-col">
           <h4>Visit</h4>
           <p><FiMapPin /> 11401 100 Ave., Grande Prairie, AB T8V 5M6, Canada</p>
-          <p><FiPhone /> <a href="tel:+18666584755">+1 (866) 658-4755</a></p>
+          <p><FiPhone /> <a href="tel:+15874950804">+1 (587) 495-0804</a></p>
         </div>
 
         <div className="footer-col">
           <h4>Hours</h4>
-          <p><FiClock /> Monday – Sunday</p>
-          <p className="footer-muted">11:00 AM – 1:00 AM</p>
+          <p>Mon – Thu: 3:30 PM – 12:00 AM</p>
+          <p className="footer-muted">Fri – Sat: 3:30 PM – 1:00 AM</p>
+          <p className="footer-muted">Sun: 3:30 PM – 2:00 AM</p>
         </div>
 
         <div className="footer-col">
@@ -32,7 +33,7 @@ export default function Footer() {
           <ul className="footer-links">
             <li><Link to="/">Home</Link></li>
             <li><Link to="/menu">Menu</Link></li>
-            <li><Link to="/entertainment">Entertainment</Link></li>
+            <li><Link to="/events">Events</Link></li>
             <li><Link to="/reservation">Reservation</Link></li>
             <li><Link to="/about">About Us</Link></li>
             <li><Link to="/contact">Contact Us</Link></li>

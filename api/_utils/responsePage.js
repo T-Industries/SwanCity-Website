@@ -45,7 +45,7 @@ export function responsePage({ status, title, message, details }) {
       <p class="close-hint">You can close this tab now.</p>
     </div>
     <div class="footer">
-      11401 100 Ave., Grande Prairie, AB · <a href="tel:+18666584755">+1 (866) 658-4755</a>
+      11401 100 Ave., Grande Prairie, AB · <a href="tel:+15874950804">+1 (587) 495-0804</a>
     </div>
   </div>
 </body>

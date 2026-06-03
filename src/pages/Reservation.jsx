@@ -32,7 +32,7 @@ export default function Reservation() {
       setStatus('success');
     } catch {
       setStatus('error');
-      setServerError("Couldn't submit your reservation. Please try again or call +1 (866) 658-4755.");
+      setServerError("Couldn't submit your reservation. Please try again or call +1 (587) 495-0804.");
     }
   };
 
@@ -60,8 +60,15 @@ export default function Reservation() {
             <div className="star-rule"><span className="star">★ ★ ★</span></div>
             <ul className="res-notes">
               <li>Walk-ins always welcome — reservations recommended on weekends and game nights.</li>
-              <li>For parties of <strong>8 or more</strong>, please call us directly at <a href="tel:+18666584755">+1 (866) 658-4755</a>.</li>
-              <li>Hours: Mon – Sun · 11:00 AM – 1:00 AM.</li>
+              <li>For enquiry call us <a href="tel:+15874950804">+1 (587) 495-0804</a>.</li>
+              <li>
+                Hours:
+                <ul className="res-hours">
+                  <li>Mon – Thu: 3:30 PM – 12:00 AM</li>
+                  <li>Fri – Sat: 3:30 PM – 1:00 AM</li>
+                  <li>Sun: 3:30 PM – 2:00 AM</li>
+                </ul>
+              </li>
               <li>We'll confirm your booking by phone or email within a few hours.</li>
             </ul>
             <div className="horseshoe-note">

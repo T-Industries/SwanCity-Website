@@ -86,7 +86,7 @@ export function buildIcs({
       `Party size: ${partySize}`,
       notes ? `Notes: ${notes}` : null,
       ``,
-      `Phone: +1 (866) 658-4755`,
+      `Phone: +1 (587) 495-0804`,
       `Address: ${LOCATION}`,
     ].filter(Boolean).join('\n')
   );

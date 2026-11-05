@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import Navbar from './components/Navbar.jsx';
 import Footer from './components/Footer.jsx';
 import Home from './pages/Home.jsx';
-// import Menu from './pages/Menu.jsx';
+// import Menu from './pages/Menu.jsx'
 import Entertainment from './pages/Entertainment.jsx';
 import Events from './pages/Events.jsx';
 import Reservation from './pages/Reservation.jsx';

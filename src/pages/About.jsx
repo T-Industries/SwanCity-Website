@@ -30,7 +30,7 @@ export default function About() {
               settling in for dinner, our crew is here to make it easy. Pull up a chair,
               stay a while — there's always room at the Roadhouse.
             </p>
-            <Link to="/menu" className="btn btn-primary">Browse the Menu</Link>
+            {/* <Link to="/menu" className="btn btn-primary">Browse the Menu</Link> */}
           </div>
           <div className="about-story-art">
             <div className="poster">
@@ -79,7 +79,7 @@ export default function About() {
           <h2>Ready to Mosey On Down?</h2>
           <p>Open seven days a week from 3:30 PM. We'll keep a seat warm.</p>
           <div className="cta-buttons">
-            <Link to="/menu" className="btn btn-primary">View Menu</Link>
+            {/* <Link to="/menu" className="btn btn-primary">View Menu</Link> */}
             <Link to="/contact" className="btn btn-outline">Contact Us</Link>
           </div>
         </div>

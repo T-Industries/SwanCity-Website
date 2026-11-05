@@ -21,7 +21,7 @@ export default function Home() {
             the kind of welcome that keeps folks coming back.
           </p>
           <div className="hero-cta">
-            <Link to="/menu" className="btn btn-primary">See the Menu</Link>
+            {/* <Link to="/menu" className="btn btn-primary">See the Menu</Link> */}
             <Link to="/events" className="btn btn-primary btn-event-glow">
               <GiMicrophone size={20} aria-hidden="true" />
               <span>Upcoming Events</span>

@@ -32,7 +32,7 @@ export default function Footer() {
           <h4>Explore</h4>
           <ul className="footer-links">
             <li><Link to="/">Home</Link></li>
-            <li><Link to="/menu">Menu</Link></li>
+            {/* <li><Link to="/menu">Menu</Link></li> */}
             <li><Link to="/events">Events</Link></li>
             <li><Link to="/reservation">Reservation</Link></li>
             <li><Link to="/about">About Us</Link></li>
